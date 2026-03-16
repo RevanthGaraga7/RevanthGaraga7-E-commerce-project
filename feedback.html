@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback Form</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <style>
+    
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+   
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      backdrop-filter: blur(10px);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .blob:nth-child(1) { width: 200px; height: 200px; top: 10%; left: 10%; animation-delay: 0s; }
+    .blob:nth-child(2) { width: 300px; height: 300px; top: 60%; right: 10%; animation-delay: 2s; }
+    .blob:nth-child(3) { width: 150px; height: 150px; bottom: 20%; left: 20%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    
+    .hero {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 100px 20px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, #fff, #a8e6cf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+
+    .features {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .feature-chip {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      padding: 20px 30px;
+      border-radius: 50px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: all 0.3s ease;
+      min-width: 200px;
+    }
+
+    .feature-chip:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .feature-chip h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.2rem;
+    }
+
+   
+    #feedback-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    #feedback-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+    }
+
+    
+    #feedback-form-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .feedback-form {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 40px;
+      border-radius: 20px;
+      width: 400px;
+      max-width: 90vw;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      transform: scale(0.8);
+      animation: popIn 0.3s ease forwards 0.1s;
+    }
+
+    @keyframes popIn {
+      to { transform: scale(1); }
+    }
+
+    .feedback-form h2 {
+      margin-bottom: 30px;
+      font-size: 28px;
+      text-align: center;
+      color: white;
+      background: linear-gradient(45deg, white, #a8e6cf);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .feedback-form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: rgba(255,255,255,0.9);
+    }
+
+    .feedback-form input,
+    .feedback-form textarea,
+    .feedback-form select {
+      width: 100%;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .feedback-form input::placeholder,
+    .feedback-form textarea::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+
+    .feedback-form input:focus,
+    .feedback-form textarea:focus,
+    .feedback-form select:focus {
+      outline: none;
+      border-color: #a8e6cf;
+      box-shadow: 0 0 0 3px rgba(168,230,207,0.2);
+    }
+
+    .feedback-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .feedback-form button {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      width: 48%;
+    }
+
+    .feedback-form button[type="submit"] {
+      background: linear-gradient(45deg, #28a745, #20c997);
+      color: white;
+    }
+
+    .feedback-form button[type="submit"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(40,167,69,0.4);
+    }
+
+    .feedback-form button[type="button"] {
+      background: linear-gradient(45deg, #dc3545, #c82333);
+      color: white;
+    }
+
+    .feedback-form button[type="button"]:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(220,53,69,0.4);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    
+    @media (max-width: 480px) {
+      .feedback-form {
+        width: 95vw;
+        padding: 30px 20px;
+      }
+
+      .feedback-form button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+  <div class="blob"></div>
+
+  <div class="hero">
+    <h1>Your Voice Matters</h1>
+    <p>We value every customer's opinion. Share your experience with us!</p>
+    
+    <div class="features">
+      <div class="feature-chip">
+        <h3>Takes 60 seconds</h3>
+        <p>Quick & easy feedback form</p>
+      </div>
+      <div class="feature-chip">
+        <h3>100% Anonymous</h3>
+        <p>Optional name/email - your choice</p>
+      </div>
+      <div class="feature-chip">
+        <h3>Directly heard</h3>
+        <p>Our team personally reviews every feedback</p>
+      </div>
+    </div>
+
+    <button id="feedback-btn">Give Feedback ✨</button>
+  </div>
+
+ 
+  <div id="feedback-form-container" class="hidden">
+    <div class="feedback-form">
+      <h2>Share Your Feedback</h2>
+      
+      <form id="feedbackForm">
+        <label for="name">Name (Optional)</label>
+        <input type="text" id="name" name="name" placeholder="Anonymous is fine">
+
+        <label for="email">Email (Optional)</label>
+        <input type="email" id="email" name="email" placeholder="For follow-up">
+
+        <label for="rating">Rating</label>
+        <select id="rating" name="rating" required>
+          <option value="">Select rating</option>
+          <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+          <option value="4">⭐⭐⭐⭐ Great</option>
+          <option value="3">⭐⭐⭐ Good</option>
+          <option value="2">⭐⭐ Fair</option>
+          <option value="1">⭐ Poor</option>
+        </select>
+
+        <label for="message">Your Feedback</label>
+        <textarea id="message" name="message" placeholder="Tell us about your experience..." required></textarea>
+
+        <div style="display: flex; gap: 10px;">
+          <button type="submit">Submit Feedback</button>
+          <button type="button" class="close-btn">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    
+    function createStars() {
+      const starsContainer = document.getElementById('stars');
+      for (let i = 0; i < 80; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        star.style.animationDuration = (Math.random() * 1 + 1) + 's';
+        starsContainer.appendChild(star);
+      }
+    }
+
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      createStars();
+      
+      const openBtn = document.getElementById('feedback-btn');
+      const closeBtn = document.querySelector('.close-btn');
+      const modal = document.getElementById('feedback-form-container');
+      const form = document.getElementById('feedbackForm');
+
+      openBtn.addEventListener('click', function() {
+        modal.classList.remove('hidden');
+      });
+
+      closeBtn.addEventListener('click', function() {
+        modal.classList.add('hidden');
+      });
+
+      window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.classList.add('hidden');
+        }
+      });
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const rating = document.getElementById('rating').value;
+        const message = document.getElementById('message').value;
+
+        if (!rating || !message) {
+          alert('Rating and feedback message are required.');
+          return;
+        }
+
+        console.log('Feedback Submitted:', { name, email, rating, message });
+
+        form.reset();
+        alert('Thank you for your feedback! We appreciate it. ✨');
+        modal.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-image: url('./images/BG-1.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.container {
+  width: 100%;
+  height: 400px;
+  background-image: url('./images/BG.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Header */
+#header {
+  background-image: url('./images/feedback-BG.jpeg');
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+#header .logo {
+  height: 120px;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* Navigation Logo Styles */
+.nav-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+#navbar li {
+  margin: 0 20px;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: rgb(30, 0, 255);
+  font-weight: 500;
+  font-size: 17px;
+  text-align: center;
+}
+
+.product {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  display: inline-block;
+  text-align: center;
+}
+
+.product img {
+  background-color: darkgoldenrod;
+  max-width: 100%;
+  height: auto;
+}
+
+#search {
+  margin: 20px;
+  padding: 10px;
+  width: 250px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.welcome-text {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: aqua;
+}
+
+#header {
+  background-color: #f8f8f8;
+  padding: 10px 20px;
+}
+
+#navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+
+#navbar h1 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+
+#navbar li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+
+  .welcome-text {
+    margin: 10px 0;
+  }
+
+  #navbar {
+    flex-direction: column;
+  }
+
+  #navbar h1 {
+    margin: 10px 0;
+  }
+}
