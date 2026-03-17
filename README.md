@@ -7,7 +7,7 @@ The goal of the project is to showcase how modern e-commerce platforms operate w
 
 🚀 Live Demo
 
-https://revanthgaraga7.github.io/RevanthGaraga7-E-commerce-
+https://revanthgaraga7.github.io/RevanthGaraga7-E-commerce-project/
 
 
 🧑‍💻 Technologies Used
